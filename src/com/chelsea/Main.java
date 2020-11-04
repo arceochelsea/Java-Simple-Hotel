@@ -1,15 +1,16 @@
 package com.chelsea;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Hotel myBooking = new Hotel("Chelsea", new int[]{101});
-        System.out.println(myBooking.toString());
+        Scanner scanner = new Scanner(System.in);
+        Hotel myBooking = new Hotel(scanner,"Chelsea", new ArrayList<>(), new ArrayList<>());
+       // myBooking.displayAvailableRooms();
+        myBooking.welcomePrompt();
         myBooking.displayAvailableRooms();
-//        Hotel myBooking = new Hotel("chelsea", 102, 103, 104);
-//        System.out.println(myBooking.availableRooms);
-
+        myBooking.displayUnavailableRooms();
     }
 }
