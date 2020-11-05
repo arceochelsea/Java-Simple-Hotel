@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Hotel myBooking = new Hotel(scanner,"Chelsea", new ArrayList<>(), new ArrayList<>());
+        Hotel myBooking = new Hotel(scanner,"", new ArrayList<>(), new ArrayList<>(), 0);
        // myBooking.displayAvailableRooms();
         myBooking.welcomePrompt();
         myBooking.displayAvailableRooms();
