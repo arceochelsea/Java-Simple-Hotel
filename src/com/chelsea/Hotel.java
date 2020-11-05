@@ -6,76 +6,82 @@ import java.util.Scanner;
 public class Hotel {
 
     private Scanner scanner;
-    private String renter;
+    private String guestName;
     private ArrayList<Integer> availableRooms;
     private ArrayList<Integer> unavailableRooms;
-    private int numberOfRooms;
 
-    public Hotel(Scanner scanner, String renter, ArrayList<Integer> availableRooms, ArrayList<Integer> unavailableRooms, int numberOfRooms) {
+    public Hotel(Scanner scanner, String guestName, ArrayList<Integer> availableRooms, ArrayList<Integer> unavailableRooms) {
 
         this.scanner = scanner;
-        this.renter = renter;
+        this.guestName = guestName;
         this.availableRooms = availableRooms;
         this.unavailableRooms = unavailableRooms;
-        this.numberOfRooms = numberOfRooms;
 
-        availableRooms.add(000);
-        availableRooms.add(121);
+        availableRooms.add(111);
         availableRooms.add(222);
         availableRooms.add(333);
         availableRooms.add(444);
-
-//        int room = 0;
-//        for (int i = 0; i < availableRooms.size(); i++) {
-//            availableRooms.add(room);
-//        }
-
+        availableRooms.add(555);
     }
 
     public void welcomePrompt() {
-
         System.out.println("Please enter your name here!");
-        renter = scanner.nextLine();
-        System.out.println("Thank you, " + renter + " for choosing Motel 6, how many rooms would you like to book today?");
-        numberOfRooms = scanner.nextInt();
+        guestName = scanner.nextLine();
+        System.out.println("Thank you, " + guestName + " for choosing Motel 6, would you like to book a room with us today? Please write YES or NO");
+        String answer = scanner.nextLine().toLowerCase().trim();
 
-        if (numberOfRooms <= availableRooms.size()) {
-            System.out.println("Thank you, " + renter + " you just booked " + numberOfRooms + " room(s) with us today.");
+        if (answer.equals("yes")) {
+            System.out.println("Thank you, " + guestName + " you just booked a room with us today.");
             checkInRoom();
         } else {
-            System.out.println("Sorry, " + renter + " we do not have this many rooms available, come back again!");
+            System.out.println("Sorry, " + guestName + " we hope you choose to come back another time!");
         }
     }
 
-    public void displayAvailableRooms(){
-        System.out.println("These room(s) are still available: " + availableRooms);
-    }
-
-    public void displayUnavailableRooms() {
-        System.out.println("These room(s) are currently occupied: " + unavailableRooms);
-    }
-
     public void checkInRoom() {
-        //remove room from availrooms arraylist
-        //add to unavailablerooms arraylist
+        System.out.println(guestName + ", you are now checked into room: " + availableRooms.get(0));
 
-        availableRooms.remove(0);
         unavailableRooms.add(availableRooms.get(0));
-        System.out.println(renter + ", you are now checked into room: " + availableRooms.get(0));
+        availableRooms.remove(0);
+
         System.out.println("Enjoy your stay at the fab Motel 6~");
 
+        displayAvailableRooms();
+        displayUnavailableRooms();
+
+        guestStatus();
+    }
+
+    public void guestStatus() {
+        System.out.println("Hello, " + guestName + " are you ready to check out now? Write YES or NO");
+        String answer = scanner.nextLine().toLowerCase().trim();
+
+        if (answer.equals("yes")) {
+            checkOutRoom();
+        } else {
+            System.out.println("Sure. We will check on your status later.");
+            guestStatus();
+        }
     }
 
     public void checkOutRoom() {
-        //remove() from unavailalberooms
-        //add() to to availablerooms
+        System.out.println(guestName + ", you are now checking out of room: " + unavailableRooms.get(0));
 
+        availableRooms.add(unavailableRooms.get(0));
+        unavailableRooms.remove(0);
 
-        System.out.println("Please come back again soon!");
+        System.out.println("Thank you, " + guestName + "! Please come back again soon!");
+
+        displayAvailableRooms();
+        displayUnavailableRooms();
     }
 
-    public String toString() {
-        return renter + " is now checking into room: " + availableRooms + ".";
+    public void displayAvailableRooms(){
+        System.out.println("available rooms: " + availableRooms);
+    }
+
+    public void displayUnavailableRooms() {
+        System.out.println("unavailable rooms: " + unavailableRooms);
     }
 
 }
